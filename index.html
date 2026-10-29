@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>浮根警報 ROOT ALERT</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="浮根警報" />
+  <meta name="theme-color" content="#435429" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="icon" type="image/png" href="icons/icon-192.png" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- SVG icon 庫（全部用程式碼畫，不用 emoji） -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-camera" viewBox="0 0 24 24"><path d="M4 8.5A2.5 2.5 0 0 1 6.5 6h1.6l1.3-1.8c.3-.4.8-.7 1.3-.7h2.6c.5 0 1 .3 1.3.7L15.9 6h1.6A2.5 2.5 0 0 1 20 8.5v8a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 16.5z"/><circle cx="12" cy="12.4" r="3.6"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M3.5 6.5l5.5-2 6 2 5.5-2v13l-5.5 2-6-2-5.5 2z"/><path d="M9 4.5v13M15 6.5v13"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c.8-3.8 3.8-6 7.5-6s6.7 2.2 7.5 6"/></symbol>
+    <symbol id="i-fall" viewBox="0 0 24 24"><circle cx="15.5" cy="4.8" r="2"/><path d="M13.8 8.6l-3.6 2.2 2.4 3-3.2 4.2M10.2 10.8L6.6 9.4M12.6 13.8l4.2.6 1.4 4"/><path d="M3 21h18"/></symbol>
+    <symbol id="i-foot" viewBox="0 0 24 24"><path d="M7 3.5c1.8 0 3 1.6 3 4.2 0 2-.8 3.3-.8 5 0 1.4 1 2.1 3 2.7 2.6.8 6.3 1.4 6.3 3.6 0 1.4-1.2 1.8-3 1.8H7.6C5.4 20.8 4 19.4 4 16.8V8c0-2.6 1.2-4.5 3-4.5z"/><path d="M4.2 15.2h5.4"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/><path d="M4 4l16 16"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="M15.5 4.5l4 4L9 19H5v-4z"/><path d="M13 7l4 4"/></symbol>
+    <symbol id="i-retake" viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v4.5h4.5"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M7 7l10 10M17 7L7 17"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20.5S3 15.2 3 8.8A4.8 4.8 0 0 1 12 6a4.8 4.8 0 0 1 9 2.8c0 6.4-9 11.7-9 11.7z"/></symbol>
+    <symbol id="i-thumb" viewBox="0 0 24 24"><path d="M7.5 10.5V20H4.5v-9.5zM7.5 10.5l3.6-6.3c1.4 0 2.4 1.1 2.1 2.5L12.6 9.5h5.6a2 2 0 0 1 2 2.4l-1.4 6.3a2.3 2.3 0 0 1-2.2 1.8H7.5"/></symbol>
+    <symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-6.2-6.5-11A6.5 6.5 0 0 1 18.5 10c0 4.8-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/></symbol>
+    <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="13" cy="4.5" r="2"/><path d="M10 21l2.2-6 2.8 2.6V21M12.2 15l.8-6.5-3.5 1.6L8 13.5M13 8.5l2 3.2 3 .8"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M12 3.5a4.5 4.5 0 0 1 4.3 3.2A4 4 0 0 1 17 14.5H7a4 4 0 0 1 .7-7.8A4.5 4.5 0 0 1 12 3.5z"/><path d="M12 14.5V21M9.5 21h5"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5.5 21V4M5.5 4.5h11l-2.2 3.8 2.2 3.8h-11"/></symbol>
+    <symbol id="i-restart" viewBox="0 0 24 24"><path d="M4.5 12a7.5 7.5 0 1 0 2.2-5.3L4.5 9"/><path d="M4.5 4.5V9H9"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></symbol>
+    <symbol id="i-image" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M4 17l5-4.5 4 3.5 3-2.5 4 3.5"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-tap" viewBox="0 0 24 24"><path d="M9.5 11V5.5a1.6 1.6 0 0 1 3.2 0V11l4.6.9c1.3.3 2.1 1.6 1.8 2.9l-1.2 4.7c-.2.9-1 1.5-1.9 1.5h-5.5c-.7 0-1.3-.3-1.7-.9L5.6 16a1.6 1.6 0 0 1 2.4-2.1l1.5 1.4"/><path d="M6.5 7.5a5 5 0 0 1 9.2 0"/></symbol>
+  </defs>
+</svg>
+
+<div class="stage">
+  <div class="phone" id="phone" data-theme="dark">
+
+    <!-- 狀態列底色（讓 iPhone 白色狀態列字在淺色頁面也看得到） -->
+    <div class="sb-shade" aria-hidden="true"></div>
+    <!-- 桌機預覽用的假狀態列（手機上隱藏，改用 iPhone 真的狀態列） -->
+    <div class="fake-status" aria-hidden="true">
+      <span id="fs-time">12:43</span>
+      <span class="fs-icons">
+        <svg width="18" height="12" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+        <b>4G</b>
+        <svg width="26" height="12" viewBox="0 0 26 12"><rect x="0.5" y="0.5" width="22" height="11" rx="3.5" fill="none" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="16" height="8" rx="2"/><rect x="23.5" y="4" width="2" height="4" rx="1" opacity=".5"/></svg>
+      </span>
+    </div>
+
+    <!-- ============ A. 假的手機桌面 ============ -->
+    <section class="screen is-active" id="s-desk" data-theme="dark">
+      <div class="desk">
+        <img class="desk-bg" src="img/home.webp" alt="" draggable="false" />
+        <button type="button" class="desk-app" id="desk-app" aria-label="開啟浮根警報">
+          <span class="desk-icon"><img src="img/app_icon.webp" alt="" draggable="false" /><i class="desk-badge" id="desk-badge">1</i></span>
+          <span class="desk-label">浮根警報</span>
+        </button>
+      </div>
+      <div class="noti-zone">
+        <button class="noti" id="noti" type="button">
+          <img class="noti-icon" id="noti-icon" src="img/icon1.webp" alt="" draggable="false" />
+          <span class="noti-txt">
+            <span class="noti-title" id="noti-title"></span>
+            <span class="noti-body" id="noti-body"></span>
+          </span>
+        </button>
+      </div>
+      <div class="desk-hint" id="desk-hint"><svg class="ic"><use href="#i-tap"/></svg>點通知或浮根警報圖示開始體驗</div>
+    </section>
+
+    <!-- ============ B. App 本體（拍照＝主頁＋底部分頁） ============ -->
+    <section class="screen" id="s-app" data-theme="light">
+      <div class="views">
+
+        <!-- B1. 拍照回報（主頁） -->
+        <div class="view is-on" id="v-camera">
+          <header class="cam-head">
+            <h2 class="cam-title">拍照回報</h2>
+            <p class="cam-loc"><span class="loc-dot"></span><span id="cam-loc">定位中…</span></p>
+          </header>
+          <div class="vf-wrap">
+            <div class="viewfinder" id="viewfinder">
+              <video id="cam-video" autoplay playsinline muted></video>
+              <canvas id="cam-canvas"></canvas>
+              <div class="vf-corners"><i></i><i></i><i></i><i></i></div>
+              <div class="vf-tip">低頭看看！拍下被浮根破壞的地面</div>
+              <div class="vf-badge">示意照片</div>
+              <div class="vf-perm" id="vf-perm">
+                <span class="perm-ic"><svg class="ic"><use href="#i-camera"/></svg></span>
+                <p class="perm-title" id="perm-title">要打開相機才能拍照喔</p>
+                <p class="perm-desc" id="perm-desc">按下面的按鈕，然後在跳出的視窗選「允許」</p>
+                <button type="button" class="perm-btn" id="perm-btn"><svg class="ic"><use href="#i-camera"/></svg>開啟相機</button>
+                <button type="button" class="perm-alt" id="perm-alt"><svg class="ic"><use href="#i-image"/></svg>先用示意照片</button>
+              </div>
+              <div class="vf-flash" id="vf-flash"></div>
+              <div class="vf-wow" id="vf-wow">
+                <img src="img/mascot_wow.webp" alt="" draggable="false" />
+                <span class="bubble">拍到了！</span>
+              </div>
+            </div>
+            <div class="peek" id="peek">
+              <img src="img/mascot_peek.webp" alt="" draggable="false" />
+              <span class="bubble bubble--peek" id="peek-bubble">選一下原因嘛～</span>
+            </div>
+          </div>
+
+          <div class="cam-panel">
+            <p class="reason-title">為什麼你會回報這個浮根呢？<small>可複選</small></p>
+            <div class="chips" id="chips">
+              <button type="button" class="chip" data-r="摔倒"><svg class="ic"><use href="#i-fall"/></svg>摔倒</button>
+              <button type="button" class="chip" data-r="卡到"><svg class="ic"><use href="#i-foot"/></svg>卡到</button>
+              <button type="button" class="chip" data-r="不美觀"><svg class="ic"><use href="#i-eye"/></svg>不美觀</button>
+              <button type="button" class="chip" data-r="其他" id="chip-other"><svg class="ic"><use href="#i-pen"/></svg>其他</button>
+            </div>
+            <input class="other-input" id="other-input" type="text" maxlength="30" placeholder="補充說明，例如：輪椅過不去" />
+            <div class="cam-actions" data-state="live" id="cam-actions">
+              <button type="button" class="btn-retake" id="btn-retake"><svg class="ic"><use href="#i-retake"/></svg>重拍</button>
+              <button type="button" class="shutter" id="btn-shutter" aria-label="拍照"><span></span></button>
+              <button type="button" class="btn-send" id="btn-send">送出回報<svg class="ic"><use href="#i-arrow"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- B2. 回報地圖 -->
+        <div class="view" id="v-map">
+          <header class="view-head"><h2>回報地圖</h2></header>
+          <div class="seg" id="seg">
+            <button type="button" class="seg-btn is-on" data-tab="all">大家的回報</button>
+            <button type="button" class="seg-btn" data-tab="me">我的生活軌跡</button>
+            <span class="seg-pill"></span>
+          </div>
+          <div class="map-stats">
+            <span class="stat"><b id="stat-total">34</b> 筆浮根回報</span>
+            <span class="stat stat--hot"><i></i>熱區 3 處</span>
+            <span class="stat stat--me"><i></i>你的回報</span>
+          </div>
+          <div class="map-scroll" id="map-scroll">
+            <svg id="map" class="map" viewBox="0 0 390 940" xmlns="http://www.w3.org/2000/svg"></svg>
+          </div>
+          <div class="trail-card" id="trail-card">
+            <img src="img/mascot_wow.webp" alt="" draggable="false" />
+            <div>
+              <p class="tc-title"><svg class="ic"><use href="#i-walk"/></svg>這週的你</p>
+              <p class="tc-stats"><b>4.2</b> km<span>·</span>經過 <b>128</b> 棵行道樹<span>·</span>回報 <b class="js-my-count">0</b> 次</p>
+            </div>
+          </div>
+          <div class="sheet" id="sheet">
+            <div class="sheet-grip"></div>
+            <div class="sheet-row">
+              <canvas class="sheet-photo" id="sheet-photo" width="240" height="240"></canvas>
+              <div class="sheet-info">
+                <p class="sheet-kicker" id="sheet-kicker"></p>
+                <h3 id="sheet-title"></h3>
+                <p class="sheet-time" id="sheet-time"></p>
+                <div class="sheet-tags" id="sheet-tags"></div>
+              </div>
+            </div>
+            <button type="button" class="metoo" id="metoo"><svg class="ic"><use href="#i-thumb"/></svg>我也遇過 <span id="metoo-n">5</span></button>
+          </div>
+        </div>
+
+        <!-- B3. 我的 -->
+        <div class="view" id="v-me">
+          <header class="view-head"><h2>我的</h2></header>
+          <div class="me-scroll">
+            <div class="me-card">
+              <img src="img/mascot_bow.webp" alt="" draggable="false" />
+              <div>
+                <p class="me-kicker">中山北路的</p>
+                <p class="me-name">浮根吹哨者</p>
+                <p class="me-rank" id="me-rank">還沒有回報，去拍第一張吧！</p>
+              </div>
+            </div>
+            <div class="me-stats">
+              <div><b class="js-my-count">0</b><span>我的回報</span></div>
+              <div><b id="me-thanks">0</b><span>收到感謝</span></div>
+              <div><b id="me-metoo">0</b><span>我也遇過</span></div>
+            </div>
+            <p class="me-sec">我的回報紀錄</p>
+            <div class="me-list" id="me-list"></div>
+            <button type="button" class="me-restart" id="me-restart"><svg class="ic"><use href="#i-restart"/></svg>重新開始展示</button>
+            <button type="button" class="me-clear" id="me-clear">清除展示資料</button>
+          </div>
+        </div>
+      </div>
+
+      <nav class="tabbar" id="tabbar">
+        <button type="button" class="tab" data-view="map"><svg class="ic"><use href="#i-map"/></svg><span>地圖</span></button>
+        <button type="button" class="tab tab--cam is-on" data-view="camera"><span class="tab-cam"><svg class="ic"><use href="#i-camera"/></svg></span><span>拍照回報</span></button>
+        <button type="button" class="tab" data-view="me"><svg class="ic"><use href="#i-user"/></svg><span>我的</span></button>
+      </nav>
+    </section>
+
+    <!-- ============ C. 感謝頁 ============ -->
+    <section class="screen" id="s-thanks" data-theme="light">
+      <button class="btn-x" id="thanks-close" type="button" aria-label="回到主頁"><svg class="ic"><use href="#i-x"/></svg></button>
+      <div class="thanks-body">
+        <h1 class="ty" id="ty" aria-label="THANK YOUUUUUU!"></h1>
+        <h2 class="ty-sub">回報成功！<br />謝謝泥讓城市更好！</h2>
+        <div class="bow-wrap" id="bow-wrap">
+          <img class="bow" id="bow" src="img/mascot_bow.webp" alt="打領結的小樹" draggable="false" />
+        </div>
+        <p class="count-row">
+          <span>中山北路已經有</span>
+          <span class="count-pill"><span class="count-num" id="count-num">033</span><span class="plus1">+1</span></span>
+          <span>個回報紀錄啦！</span>
+        </p>
+        <div class="big-btns">
+          <button type="button" class="big-btn big-btn--coral" id="go-cheer">
+            <svg class="bb-icon"><use href="#i-heart"/></svg>
+            <b>超級感謝</b>
+            <small>給中山北路的其他<br />浮根吹哨者送上感謝吧！</small>
+          </button>
+          <button type="button" class="big-btn big-btn--teal" id="go-map">
+            <svg class="bb-icon bb-icon--line"><use href="#i-map"/></svg>
+            <b>回報地圖</b>
+            <small>來看看其他人回報的浮根<br />和自己的生活軌跡地圖吧！</small>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ D. 超級感謝 ============ -->
+    <section class="screen" id="s-cheer" data-theme="light">
+      <header class="sub-head">
+        <button class="btn-back" id="cheer-back" type="button" aria-label="返回"><svg class="ic"><use href="#i-back"/></svg></button>
+        <h2>超級感謝</h2>
+        <button class="btn-done" id="cheer-done" type="button">完成</button>
+      </header>
+      <div class="cheer-top">
+        <p class="cheer-lead">點下面的大愛心，<br />送給中山北路的 <b id="cheer-people">33</b> 位浮根吹哨者！</p>
+        <div class="avatars" id="avatars"></div>
+        <p class="cheer-count"><span id="cheer-n">0</span> <small>顆愛心已送出</small></p>
+        <p class="cheer-msg" id="cheer-msg">連點看看！</p>
+        <button class="cheer-next" id="cheer-next" type="button">去看回報地圖<svg class="ic"><use href="#i-arrow"/></svg></button>
+      </div>
+      <button class="hug" id="hug" type="button" aria-label="送出愛心">
+        <img src="img/mascot_hug.webp" alt="抱著大愛心的小樹" draggable="false" />
+      </button>
+    </section>
+
+    <div class="toast" id="toast"></div>
+  </div>
+
+  <p class="stage-note">ROOT ALERT 浮根警報 · 互動原型<br /><small>iPhone：用 Safari 開啟 → 分享 → 加入主畫面，就能全螢幕展示</small></p>
+</div>
+<script src="main.js"></script>
+</body>
+</html>
