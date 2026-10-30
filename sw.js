@@ -1,5 +1,5 @@
 /* 浮根警報 · 離線快取：第一次開啟後，比賽現場沒網路也能展示 */
-const CACHE = "rootalert-202610292206";
+const CACHE = "rootalert-202610301439";
 const ASSETS = [
   "./",
   "./index.html",

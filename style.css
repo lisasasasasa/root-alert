@@ -233,10 +233,11 @@ p, h1, h2, h3 { margin: 0; }
 .bubble { position: absolute; white-space: nowrap; padding: 6px 12px; border-radius: 14px; background: #fff; color: var(--ink); font-size: 14px; font-weight: 900; box-shadow: 0 4px 12px rgba(0,0,0,.15); }
 .vf-wow .bubble { left: 50%; top: -14px; transform: translateX(-50%); }
 
-.peek { position: absolute; left: -16px; bottom: -34px; width: 92px; z-index: 2; pointer-events: none; transform-origin: left bottom; animation: peek 3.2s ease-in-out infinite; }
+.peek { position: absolute; left: -26px; bottom: -34px; width: 100px; z-index: 2; pointer-events: none; animation: peek 3.2s ease-in-out infinite; }
 .peek img { width: 100%; display: block; filter: drop-shadow(2px 6px 8px rgba(0,0,0,.18)); }
-@keyframes peek { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(4deg) translateX(3px); } }
-.bubble--peek { left: 78px; top: 10px; opacity: 0; transform: scale(.6); transform-origin: left center; transition: all .3s var(--spring); }
+/* 只上下輕晃、往右探頭，左邊的切邊永遠藏在畫面外 */
+@keyframes peek { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(4px, -4px); } }
+.bubble--peek { left: 92px; top: 10px; opacity: 0; transform: scale(.6); transform-origin: left center; transition: all .3s var(--spring); }
 .bubble--peek::before { content: ""; position: absolute; left: -6px; top: 50%; margin-top: -6px; border: 6px solid transparent; border-right-color: #fff; border-left: 0; }
 .peek.is-talk .bubble--peek { opacity: 1; transform: none; }
 
